@@ -1,7 +1,10 @@
 var XpModel = require("../models/xp");
 var UserCharacterModel = require("../models/usercharacter");
 var xpContract = require("./../contract/xpConnection");
+var characterContract = require("./../contract/characterConnection");
 var logHelper = require("../helper/logs");
+const axios = require("axios");
+const constants = require("../utils/constants");
 
 const xpDao = {
   async getAllXp() {
@@ -169,6 +172,27 @@ const xpDao = {
               accuracy: properties.accuracy + updatedLevel * 1,
             };
 
+            let newCharacterObj = {
+              level: level + 1,
+              properties: {
+                xp: updatedXp,
+                hp: properties.hp + updatedLevel * 10,
+                mp: properties.mp + updatedLevel * 7,
+                Patk: Math.floor(properties.Patk + updatedLevel * 1.1),
+                Pdef: Math.floor(properties.Pdef + updatedLevel * 1.1),
+                speed: properties.speed + updatedLevel * 0.05,
+                accuracy: properties.accuracy + updatedLevel * 1,
+              },
+              name: "Archer",
+              description:
+                "The archer is the character with fast attack speed and angelic beauty.",
+              image: "QmchE9x6ggMAZPyZZ49Q2QKJ3bcAHNnSSHtooR7s3ZWmtE",
+            };
+
+            // let res = await characterContract.methods
+            //   .createItem()
+            //   .send((err, transactionHash));
+
             userCharacterResponse = await UserCharacterModel.findOneAndUpdate(
               { owner: owner },
               { properties: newProp, level: updatedLevel },
@@ -255,8 +279,81 @@ const xpDao = {
   },
 
   async deleteXp() {
-    await XpModel.deleteMany({});
-    return await XpModel.find({});
+    // await XpModel.deleteMany({});
+    // return await XpModel.find({});
+    let owner = "0x9D7117a07fca9F22911d379A9fd5118A5FA4F448";
+    try {
+      let ipfs_url = `${constants.ipfs_url}/pinning/pinJSONToIPFS`;
+
+      let newCharacterObj = {
+        level: 2 + 1,
+        properties: {
+          xp: 21,
+          hp: 21,
+          mp: 21,
+          Patk: 21,
+          Pdef: 21,
+          speed: 21,
+          accuracy: 21,
+        },
+        name: "Archer",
+        description:
+          "The archer is the character with fast attack speed and angelic beauty.",
+        image: "QmchE9x6ggMAZPyZZ49Q2QKJ3bcAHNnSSHtooR7s3ZWmtE",
+      };
+
+      let body = {
+        pinataMetadata: {
+          name: `userCharacter_${newCharacterObj.level}_${newCharacterObj.name}`,
+        },
+        pinataContent: newCharacterObj,
+      };
+
+      let pinataRes = await axios
+        .post(ipfs_url, body, {
+          headers: {
+            pinata_api_key: process.env.pinata_api_key,
+            pinata_secret_api_key: process.env.pinata_api_secret,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      console.log(pinataRes);
+      let jsonHash = pinataRes.IpfsHash;
+
+      // Miniting new charcter
+      const response = await characterContract.methods
+        .createItem(owner, jsonHash)
+        .send(
+          { from: owner, gasPrice: 10000000000 },
+          async function (error, transactionHash) {
+            if (transactionHash) {
+              console.log("2.");
+              console.log(transactionHash);
+            } else {
+              console.log("3.");
+              console.log(error);
+            }
+          }
+        )
+        .on("receipt", async function (receipt) {
+          console.log("4.");
+          console.log(receipt);
+        })
+        .on("error", async function (error) {
+          console.log("5.");
+          console.log(error);
+        });
+      console.log("1.");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 
