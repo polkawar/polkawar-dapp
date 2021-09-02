@@ -1,10 +1,9 @@
 var XpModel = require("../models/xp");
 var UserCharacterModel = require("../models/usercharacter");
 var xpContract = require("./../contract/xpConnection");
-var characterContract = require("./../contract/characterConnection");
 var logHelper = require("../helper/logs");
-const axios = require("axios");
 const constants = require("../utils/constants");
+const characterHelper = require("../helper/characterHelper");
 
 const xpDao = {
   async getAllXp() {
@@ -110,11 +109,9 @@ const xpDao = {
             },
             (err, doc) => {
               if (err) {
-                console.log(err);
                 return err;
               }
               if (doc) {
-                console.log(doc);
                 return doc;
               }
             }
@@ -183,26 +180,37 @@ const xpDao = {
                 speed: properties.speed + updatedLevel * 0.05,
                 accuracy: properties.accuracy + updatedLevel * 1,
               },
-              name: "Archer",
-              description:
-                "The archer is the character with fast attack speed and angelic beauty.",
-              image: "QmchE9x6ggMAZPyZZ49Q2QKJ3bcAHNnSSHtooR7s3ZWmtE",
+
+              name: characterData.name,
+              username: characterData.username,
+              image: characterData.hashImage,
+              description: characterData.description,
+              upgradeDate: new Date().toISOString(),
             };
 
-            // let res = await characterContract.methods
-            //   .createItem()
-            //   .send((err, transactionHash));
+            let mintResponse = await characterHelper.mintCharacter(
+              owner,
+              newCharacterObj
+            );
+            if (!mintResponse) {
+              logHelper.writeLog(
+                owner,
+                "failed",
+                "backend",
+                blockNo,
+                "claimxp",
+                `e. Minting of character failed.`
+              );
+            }
 
             userCharacterResponse = await UserCharacterModel.findOneAndUpdate(
               { owner: owner },
               { properties: newProp, level: updatedLevel },
               (err, doc) => {
                 if (err) {
-                  console.log(err);
                   return err;
                 }
                 if (doc) {
-                  console.log(doc);
                   return doc;
                 }
               }
@@ -214,11 +222,9 @@ const xpDao = {
               { properties: properties },
               (err, doc) => {
                 if (err) {
-                  console.log(err);
                   return err;
                 }
                 if (doc) {
-                  console.log(doc);
                   return doc;
                 }
               }
@@ -279,14 +285,14 @@ const xpDao = {
   },
 
   async deleteXp() {
-    // await XpModel.deleteMany({});
-    // return await XpModel.find({});
-    let owner = "0x9D7117a07fca9F22911d379A9fd5118A5FA4F448";
     try {
+      let owner = "0x9D7117a07fca9F22911d379A9fd5118A5FA4F448";
+      let privateOwner = "0x3c41896C906a2DC4e28CFBD12d3f78454D510B6E";
+      // 1. Pinning the JSON
       let ipfs_url = `${constants.ipfs_url}/pinning/pinJSONToIPFS`;
 
       let newCharacterObj = {
-        level: 2 + 1,
+        level: 3,
         properties: {
           xp: 21,
           hp: 21,
@@ -297,62 +303,28 @@ const xpDao = {
           accuracy: 21,
         },
         name: "Archer",
+        username: "Tahir Ahmad",
+        image: "QmchE9x6ggMAZPyZZ49Q2QKJ3bcAHNnSSHtooR7s3ZWmtE",
         description:
           "The archer is the character with fast attack speed and angelic beauty.",
-        image: "QmchE9x6ggMAZPyZZ49Q2QKJ3bcAHNnSSHtooR7s3ZWmtE",
+        upgradeDate: new Date().toISOString(),
       };
 
-      let body = {
-        pinataMetadata: {
-          name: `userCharacter_${newCharacterObj.level}_${newCharacterObj.name}`,
-        },
-        pinataContent: newCharacterObj,
-      };
-
-      let pinataRes = await axios
-        .post(ipfs_url, body, {
-          headers: {
-            pinata_api_key: process.env.pinata_api_key,
-            pinata_secret_api_key: process.env.pinata_api_secret,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          return res.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      console.log(pinataRes);
-      let jsonHash = pinataRes.IpfsHash;
-
-      // Miniting new charcter
-      const response = await characterContract.methods
-        .createItem(owner, jsonHash)
-        .send(
-          { from: owner, gasPrice: 10000000000 },
-          async function (error, transactionHash) {
-            if (transactionHash) {
-              console.log("2.");
-              console.log(transactionHash);
-            } else {
-              console.log("3.");
-              console.log(error);
-            }
-          }
-        )
-        .on("receipt", async function (receipt) {
-          console.log("4.");
-          console.log(receipt);
-        })
-        .on("error", async function (error) {
-          console.log("5.");
-          console.log(error);
-        });
-      console.log("1.");
-      console.log(response);
+      let mintResponse = await characterHelper.mintCharacter(
+        owner,
+        newCharacterObj
+      );
+      console.log(mintResponse);
     } catch (error) {
       console.log(error);
+      logHelper.writeLog(
+        owner,
+        "failed",
+        "backend",
+        blockNo,
+        "claimxp",
+        `e. failed in minting new character.`
+      );
     }
   },
 };
