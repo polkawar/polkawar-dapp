@@ -12,8 +12,8 @@ import {
   getUserAddress,
 } from "./../../actions/web3Actions";
 import Loader from "../../components/Loader";
-import ConnectButton from "../../components/ConnectButton";
-import CharacterSection from "./CharacterSection";
+import ConnectButton from "../../common/ConnectButton";
+import ProfileSection from "./ProfileSection";
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -318,7 +318,7 @@ function Profile({ checkAuthenticated, authenticated }) {
       {actualCase === 4 && authenticated && (
         <div className={classes.background}>
           <div className="container">
-            <CharacterSection />
+            <ProfileSection />
           </div>
         </div>
       )}

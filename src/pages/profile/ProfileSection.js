@@ -17,9 +17,9 @@ import Loader from "../../components/Loader";
 import CreateCharacterForm from "../../components/CharacterComponents/CreateCharacterForm";
 import imageBaseUrl from "../../actions/imageBaseUrl";
 import { FileCopy } from "@material-ui/icons";
-import CharacterOverview from "./profileComponents/CharacterOverview";
-import CharacterStats from "./profileComponents/CharacterStats";
-import CharacterItems from "./profileComponents/CharacterItems";
+import CharacterOverview from "./sections/CharacterOverview";
+import CharacterStats from "./sections/CharacterStats";
+import CharacterItems from "./sections/CharacterItems";
 import ItemSection from "../../components/ItemsComponents/ItemSection";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -199,7 +199,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CharacterSection({
+function ProfileSection({
   getUserCharacter,
   getMaxStatsOfCharacter,
   usercharacter,
@@ -474,4 +474,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { getUserCharacter, getMaxStatsOfCharacter };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CharacterSection);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileSection);

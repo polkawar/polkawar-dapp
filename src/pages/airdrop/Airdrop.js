@@ -5,7 +5,7 @@ import { Button, Grow } from "@material-ui/core";
 import { connect } from "react-redux";
 import Loader from "./../../components/Loader";
 import CountdownTimer from "./../../components/CountdownTimer";
-import ConnectButton from "../../components/ConnectButton";
+import ConnectButton from "../../common/ConnectButton";
 import imageBaseUrl from "./../../actions/imageBaseUrl";
 import {
   checkCorrectNetwork,

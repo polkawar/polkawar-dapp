@@ -6,7 +6,7 @@ import { Slide } from "@material-ui/core";
 import { getUserItems } from "./../../actions/itemActions";
 import Loader from "../Loader";
 import imageBaseUrl from "../../actions/imageBaseUrl";
-import CustomButton from "../CustomButton";
+import CustomButton from "../../common/CustomButton";
 import ItemProfileCard from "./ItemProfileCard";
 import ProfileMysteryCard from "../BidComponents/ProfileMysteryCard";
 

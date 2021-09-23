@@ -17,6 +17,18 @@ export const theme = createMuiTheme({
       light: "rgba(89, 210, 188, 1)",
       main: "#C80C81",
     },
+    pwar: {
+      yellow: "#fdd835",
+      yellowLight: "#ffeb3b",
+      purple: "#7b1fa2",
+      purpleLight: "#6a1b9a",
+      pink: "#e91e63",
+      pinkLight: "#ad1457",
+      black: "#000000",
+      blacklight: "#212121",
+      grey: "#bdbdbd",
+      greyLight: "#e5e5e5",
+    },
     pbr: {
       primary: "#C80C81",
       secondary: "#f4c8dd",

@@ -1,0 +1,122 @@
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Card } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    minHeight: 180,
+    width: "100%",
+    padding: 20,
+    borderRadius: 30,
+    background:
+      "radial-gradient(128% 331% at 118% 0%, rgb(214, 240, 30) 0%, rgb(5, 225, 189) 100%)",
+    backgroundColor: "rgba(41, 42, 66, 0.3)",
+    border: "1px solid #212121",
+    filter: "drop-shadow(0 0 0.5rem #212121)",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 200,
+      height: "100%",
+    },
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 22,
+    color: theme.palette.pwar.blackLight,
+  },
+  logoWrapper: {
+    height: 40,
+    width: 40,
+    borderRadius: "50%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  logo: {
+    height: 40,
+    width: 40,
+  },
+  tokenTitle: {
+    fontWeight: 500,
+    padding: 0,
+    paddingLeft: 10,
+    fontSize: 17,
+    color: theme.palette.pwar.blackLight,
+  },
+
+  tokenAmount: {
+    fontWeight: 500,
+    padding: 0,
+    paddingLeft: 10,
+    fontSize: 20,
+    color: theme.palette.pwar.blackLight,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  earn: {
+    textAlign: "center",
+    color: theme.palette.pwar.black,
+    fontSize: 12,
+    fontWeight: 400,
+    fontFamily: "Work Sans",
+  },
+}));
+function Chances({ account }) {
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.card} elevation={10}>
+      <h6 className={classes.title}>Your Chances</h6>
+      <div className="d-flex justify-content-center align-items-center">
+        <div
+          style={{
+            backgroundColor: "#C80C81",
+            borderRadius: "50%",
+            height: "5px",
+            width: "5px",
+            marginRight: 5,
+          }}
+        ></div>
+        <div className={classes.earn}>8932 PWAR</div>
+      </div>
+      <div>
+        <div className="d-flex justify-content-between mt-3">
+          <div className="d-flex justify-content-start align-items-center">
+            <div className={classes.logoWrapper}>
+              <img src="images/total.png" className={classes.logo} />
+            </div>
+            <div>
+              <div className={classes.tokenTitle}>Total chances</div>
+            </div>
+          </div>
+
+          <div className={classes.tokenAmount}>32</div>
+        </div>
+        <div className="d-flex justify-content-between mt-4">
+          <div className="d-flex justify-content-start align-items-center">
+            <div className={classes.logoWrapper}>
+              <img src="images/raffles.png" className={classes.logo} />
+            </div>
+            <div>
+              <div className={classes.tokenTitle}>Total chances</div>
+            </div>
+          </div>
+
+          <div className={classes.tokenAmount}>12</div>
+        </div>{" "}
+      </div>
+    </Card>
+  );
+}
+
+Chances.propTypes = {
+  account: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  account: state.account,
+});
+
+export default connect(mapStateToProps, {})(Chances);

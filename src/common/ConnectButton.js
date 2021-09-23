@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { authenticateUser } from "./../actions/authActions";
+import { authenticateUser } from "../actions/authActions";
 import {
   checkCorrectNetwork,
   checkWalletAvailable,

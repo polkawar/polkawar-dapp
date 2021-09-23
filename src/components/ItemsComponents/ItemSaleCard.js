@@ -4,7 +4,7 @@ import { Button, Dialog, Slide, Backdrop, Divider } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import { Link } from "react-router-dom";
 import imageBaseUrl from "../../actions/imageBaseUrl";
-import ProgressBar from "../ProgressBar";
+import ProgressBar from "./ProgressBar";
 import { addUserItem } from "../../actions/itemActions";
 import propTypes from "prop-types";
 import { connect } from "react-redux";

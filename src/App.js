@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import Appbar from "./common/Appbar";
 import Footer from "./common/Footer";
-import "./App.css";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { theme } from "./theme";
 import Profile from "./pages/profile/Profile";
@@ -12,10 +11,11 @@ import store from "./store";
 import Airdrop from "./pages/airdrop/Airdrop";
 import Sale from "./pages/sale/Sale";
 import Bid from "./pages/bid/Bid";
-import Home from "./pages/layout/Layout";
+import Home from "./pages/home/Home";
 import BidDetails from "./pages/bid/BidDetails";
 import "./web";
 import Leaderboard from "./pages/leaderboard/Leaderboard";
+import Raffle from "./pages/raffle/Raffle";
 
 export default function App() {
   return (
@@ -51,6 +51,9 @@ export default function App() {
                 </Route>
                 <Route exact path="/leaderboard">
                   <Leaderboard />
+                </Route>
+                <Route exact path="/play">
+                  <Raffle />
                 </Route>
               </Switch>
               <div>

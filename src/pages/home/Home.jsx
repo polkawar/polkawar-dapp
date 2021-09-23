@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import HotCharacters from "./sections/HotCharacters";
 import Categories from "./sections/Categories";
-import ConnectButton from "../../components/ConnectButton";
+import ConnectButton from "../../common/ConnectButton";
 
 const useStyles = makeStyles((theme) => ({
   spacing: {
@@ -21,7 +21,6 @@ function Home({ authenticated }) {
 
   return (
     <div className={classes.spacing}>
-     
       {!authenticated ? (
         <div>
           <ConnectButton />

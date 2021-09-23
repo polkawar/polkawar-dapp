@@ -3,14 +3,14 @@ import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import CharacterCard from "../../../components/CharacterComponents/CharacterCard";
-import { getTopCharacters } from "./../../../actions/characterActions";
+import { getTopCharacters } from "../../../actions/characterActions";
 import {
   checkCorrectNetwork,
   checkWalletAvailable,
 } from "../../../actions/web3Actions";
 import { Dialog, Divider, Slide, Backdrop } from "@material-ui/core";
 import BuildCharacter from "../../../components/CharacterComponents/BuildCharacter";
-import { readCache, addDataIntoCache } from "./../../../actions/cacheActions";
+import { readCache, addDataIntoCache } from "../../../actions/cacheActions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
