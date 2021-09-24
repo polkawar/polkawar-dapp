@@ -6,54 +6,53 @@ import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    minHeight: 180,
+    minHeight: 150,
     width: "100%",
-    padding: 20,
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
     borderRadius: 30,
+    // background:
+    //   "radial-gradient(128% 331% at 118% 0%, rgb(214, 240, 30) 0%, rgb(5, 225, 189) 100%)",
     background:
-      "radial-gradient(128% 331% at 118% 0%, rgb(214, 240, 30) 0%, rgb(5, 225, 189) 100%)",
+      "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
     backgroundColor: "rgba(41, 42, 66, 0.3)",
     border: "1px solid #212121",
     filter: "drop-shadow(0 0 0.5rem #212121)",
     [theme.breakpoints.down("sm")]: {
-      minHeight: 200,
-      height: "100%",
+      minHeight: 120,
+      minWidth: 240,
+      width: "100%",
     },
   },
   title: {
     textAlign: "center",
-    fontSize: 22,
+    fontSize: 20,
     color: theme.palette.pwar.blackLight,
   },
   logoWrapper: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
     borderRadius: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
   logo: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
   },
   tokenTitle: {
-    fontWeight: 500,
+    fontWeight: 400,
     padding: 0,
     paddingLeft: 10,
-    fontSize: 17,
+    fontSize: 15,
     color: theme.palette.pwar.blackLight,
   },
 
   tokenAmount: {
     fontWeight: 500,
     padding: 0,
-    paddingLeft: 10,
     fontSize: 20,
     color: theme.palette.pwar.blackLight,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
   },
   earn: {
     textAlign: "center",
@@ -68,7 +67,7 @@ function Chances({ account }) {
 
   return (
     <Card className={classes.card} elevation={10}>
-      <h6 className={classes.title}>Your Chances</h6>
+      <div className={classes.title}>Your Chances</div>
       <div className="d-flex justify-content-center align-items-center">
         <div
           style={{
@@ -94,7 +93,7 @@ function Chances({ account }) {
 
           <div className={classes.tokenAmount}>32</div>
         </div>
-        <div className="d-flex justify-content-between mt-4">
+        <div className="d-flex justify-content-between mt-3">
           <div className="d-flex justify-content-start align-items-center">
             <div className={classes.logoWrapper}>
               <img src="images/raffles.png" className={classes.logo} />

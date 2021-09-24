@@ -4,23 +4,33 @@ import { Avatar, Button, Card } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    minHeight: 600,
+    minHeight: 400,
     width: "100%",
     padding: 20,
+    paddingBottom: 25,
     borderRadius: 30,
     backgroundColor: "rgba(41, 42, 66, 0.3)",
-
+    // background:
+    //   "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
+    // background:
+    //   "radial-gradient(128% 331% at 118% 0%, rgb(214, 240, 30) 0%, rgb(5, 225, 189) 100%)",
     border: "1px solid #212121",
     filter: "drop-shadow(0 0 0.5rem #212121)",
     [theme.breakpoints.down("sm")]: {
+      minHeight: 200,
       minWidth: 240,
       width: "100%",
+      padding: 10,
+      paddingBottom: 20,
     },
   },
   title: {
     textAlign: "center",
     fontSize: 22,
     color: theme.palette.pwar.greyLight,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 18,
+    },
   },
   logoWrapper: {
     height: 45,
@@ -77,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 12,
     fontWeight: 400,
     fontFamily: "Work Sans",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 10,
+    },
   },
   desktop: {
     display: "flex",
@@ -119,7 +132,21 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     [theme.breakpoints.down("md")]: {
       padding: "8px 26px 8px 26px",
+      fontSize: 16,
     },
+  },
+  jackpot: {
+    width: "100%",
+    padding: 5,
+    marginTop: 10,
+    backgroundColor: "black",
+    borderRadius: 7,
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+  },
+  jackpotImage: {
+    width: "100%",
   },
 }));
 export default function Spin({}) {
@@ -142,8 +169,11 @@ export default function Spin({}) {
               }}
             ></div>
             <div className={classes.earn}>
-              You will lottery tickets and winner tickets will be announced.
+              Win upto 500 USDT per winning ticket
             </div>
+          </div>
+          <div className={classes.jackpot}>
+            <img src="images/jackpot.gif" className={classes.jackpotImage} />
           </div>
         </div>
         <div className="text-center mt-4">

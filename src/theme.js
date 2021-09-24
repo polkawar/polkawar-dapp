@@ -25,7 +25,7 @@ export const theme = createMuiTheme({
       pink: "#e91e63",
       pinkLight: "#ad1457",
       black: "#000000",
-      blacklight: "#212121",
+      blackLight: "#212121",
       grey: "#bdbdbd",
       greyLight: "#e5e5e5",
     },

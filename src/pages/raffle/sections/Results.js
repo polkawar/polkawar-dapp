@@ -6,13 +6,16 @@ import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    minHeight: 320,
+    minHeight: 120,
     width: "100%",
-    padding: 20,
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
     borderRadius: 30,
     background:
-      "radial-gradient(160% 150% at 108% -9%, rgb(41, 231, 232) 0%, rgb(101, 31, 255) 100%)",
-    backgroundColor: "rgba(41, 42, 66, 0.3)",
+      "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
+    // backgroundColor: "rgba(255, 255, 255, 0.8)",
     border: "1px solid #212121",
     filter: "drop-shadow(0 0 0.5rem #212121)",
     [theme.breakpoints.down("sm")]: {
@@ -22,23 +25,20 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
-    fontSize: 22,
+    fontSize: 20,
+    paddingLeft: 5,
     color: theme.palette.pwar.blackLight,
   },
   logoWrapper: {
-    height: 36,
-    width: 36,
-
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    height: 30,
+    width: 30,
   },
   logo: {
-    height: 35,
-    width: 35,
+    height: 30,
+    width: 30,
   },
   tokenTitle: {
-    fontWeight: 500,
+    fontWeight: 400,
     padding: 0,
     paddingLeft: 10,
     fontSize: 18,
@@ -46,10 +46,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   tokenAmount: {
-    fontWeight: 500,
+    fontWeight: 400,
     padding: 0,
     paddingLeft: 10,
-    fontSize: 16,
+    fontSize: 14,
     color: theme.palette.pwar.blackLight,
     display: "flex",
     justifyContent: "center",
@@ -68,7 +68,12 @@ function Results({ account }) {
 
   return (
     <Card className={classes.card} elevation={10}>
-      <h6 className={classes.title}>Winning Tickets</h6>
+      <div className="d-flex justify-content-center align-items-center">
+        <div className={classes.logoWrapper}>
+          <img src="images/ticket.png" className={classes.logo} />
+        </div>
+        <div className={classes.title}>Winning Tickets</div>
+      </div>
       <div className="d-flex justify-content-center align-items-center">
         <div
           style={{
@@ -79,99 +84,44 @@ function Results({ account }) {
             marginRight: 5,
           }}
         ></div>
+
         <div className={classes.earn}>10 Winners</div>
       </div>
       <div>
         <div className="d-flex justify-content-between mt-3">
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>324</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>324</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-        </div>{" "}
-        <div className="d-flex justify-content-between mt-4">
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>324</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>324</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-        </div>{" "}
-        <div className="d-flex justify-content-between mt-4">
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>324</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>463</div>
-            </div>
+        </div>
+        <div className="d-flex justify-content-between mt-3">
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-        </div>{" "}
-        <div className="d-flex justify-content-between mt-4">
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>324</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>753</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-        </div>{" "}
-        <div className="d-flex justify-content-between mt-4">
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>324</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-          <div className="d-flex justify-content-start align-items-center">
-            <div className={classes.logoWrapper}>
-              <img src="images/win.png" className={classes.logo} />
-            </div>
-            <div>
-              <div className={classes.tokenTitle}>932</div>
-            </div>
+          <div>
+            <div className={classes.tokenTitle}>324</div>
           </div>
-        </div>{" "}
+        </div>
       </div>
     </Card>
   );
