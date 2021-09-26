@@ -173,7 +173,10 @@ export default function Spin({}) {
             </div>
           </div>
           <div className={classes.jackpot}>
-            <img src="images/jackpot.gif" className={classes.jackpotImage} />
+            <img
+              src="images/jackpot_static.png"
+              className={classes.jackpotImage}
+            />
           </div>
         </div>
         <div className="text-center mt-4">
