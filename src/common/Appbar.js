@@ -69,8 +69,9 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     fontWeight: 500,
     fontStyle: "normal",
-    letterSpacing: 0.1,
+    letterSpacing: -0.1,
     textAlign: "start",
+    fontSize: 15,
     [theme.breakpoints.down("md")]: {
       display: "none",
     },
@@ -78,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
   tabsActive: {
     color: theme.palette.pbr.textPrimary,
     display: "block",
-
     cursor: "pointer",
     padding: "15px 14px 15px",
     lineHeight: "20.7px",
@@ -87,8 +87,9 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     fontWeight: 500,
     fontStyle: "normal",
-    letterSpacing: 0.1,
+    letterSpacing: -0.1,
     textAlign: "start",
+    fontSize: 15,
     [theme.breakpoints.down("md")]: {
       display: "none",
     },
@@ -525,28 +526,37 @@ function PrimaryAppbar({
             <Typography className={classes.tabs} variant="subtitle1" noWrap>
               Battle Room
             </Typography>
-
-            <a href="https://polkawar.com">
-              {" "}
-              <Typography
-                variant="subtitle1"
-                noWrap
-                className={navIndex === 4 ? classes.tabsActive : classes.tabs}
-                onClick={() => setNavIndex(4)}
-              >
-                Landing Page
-              </Typography>
-            </a>
-            <Link to="/play">
+            <Link to="/sale">
               <Typography
                 variant="subtitle1"
                 noWrap
                 className={navIndex === 3 ? classes.tabsActive : classes.tabs}
                 onClick={() => setNavIndex(3)}
               >
+                Flash Sale
+              </Typography>
+            </Link>
+            <Link to="/play">
+              <Typography
+                variant="subtitle1"
+                noWrap
+                className={navIndex === 4 ? classes.tabsActive : classes.tabs}
+                onClick={() => setNavIndex(4)}
+              >
                 Play & Earn
               </Typography>
             </Link>
+            <a href="https://polkawar.com">
+              {" "}
+              <Typography
+                variant="subtitle1"
+                noWrap
+                className={navIndex === 5 ? classes.tabsActive : classes.tabs}
+                onClick={() => setNavIndex(5)}
+              >
+                Landing Page
+              </Typography>
+            </a>
 
             <div className={classes.sectionDesktop}>
               {authenticated ? (
@@ -579,11 +589,6 @@ function PrimaryAppbar({
                 </div>
               )}
 
-              <div>
-                <Link to={"/sale"}>
-                  <Button className={classes.saleButton}>Flash Sale</Button>
-                </Link>
-              </div>
               <div>
                 <Link to={"/bid"}>
                   <Button className={classes.bidButton}>
