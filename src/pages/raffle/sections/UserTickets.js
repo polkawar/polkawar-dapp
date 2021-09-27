@@ -13,10 +13,11 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 20,
     paddingBottom: 20,
     borderRadius: 30,
+    backgroundColor: "rgba(41, 42, 66, 0.5)",
     // background:
-    //   "radial-gradient(160% 150% at 108% -9%, rgb(41, 231, 232) 0%, rgb(101, 31, 255) 100%)",
-    background:
-      "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
+    // //   "radial-gradient(160% 150% at 108% -9%, rgb(41, 231, 232) 0%, rgb(101, 31, 255) 100%)",
+    // background:
+    //   "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
     border: "1px solid #212121",
     filter: "drop-shadow(0 0 0.5rem #212121)",
     [theme.breakpoints.down("sm")]: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontSize: 20,
     color: theme.palette.pwar.blackLight,
+    color: "white",
   },
 
   tokenTitle: {
@@ -36,14 +38,16 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     paddingLeft: 10,
     fontSize: 16,
-    color: theme.palette.pwar.blackLight,
+    // color: theme.palette.pwar.blackLight,
+    color: "white",
   },
   earn: {
     textAlign: "center",
-    color: theme.palette.pwar.black,
+    // color: theme.palette.pwar.black,
     fontSize: 12,
     fontWeight: 400,
     fontFamily: "Work Sans",
+    color: "white",
   },
 }));
 function UserTickets({ account }) {

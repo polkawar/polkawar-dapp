@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 20,
     paddingBottom: 25,
     borderRadius: 30,
-    backgroundColor: "rgba(41, 42, 66, 0.3)",
+    backgroundColor: "rgba(41, 42, 66, 0.5)",
+    // background: `linear-gradient(to bottom, #455a64, #78909c 50%, #78909c 75%, #78909c 75%)`,
     // background:
     //   "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
     // background:
@@ -139,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: 5,
     marginTop: 10,
-    backgroundColor: "black",
+    backgroundColor: "#880e4f",
     borderRadius: 7,
     [theme.breakpoints.down("md")]: {
       width: "100%",

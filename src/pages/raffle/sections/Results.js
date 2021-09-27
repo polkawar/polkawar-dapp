@@ -13,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 20,
     paddingBottom: 20,
     borderRadius: 30,
-    background:
-      "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
-    // backgroundColor: "rgba(255, 255, 255, 0.8)",
+    backgroundColor: "rgba(41, 42, 66, 0.5)",
+    // background:
+    //   "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
+
     border: "1px solid #212121",
     filter: "drop-shadow(0 0 0.5rem #212121)",
     [theme.breakpoints.down("sm")]: {
@@ -27,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontSize: 20,
     paddingLeft: 5,
-    color: theme.palette.pwar.blackLight,
+    // color: theme.palette.pwar.blackLight,
+    color: "white",
   },
   logoWrapper: {
     height: 30,
@@ -41,8 +43,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     padding: 0,
     paddingLeft: 10,
-    fontSize: 18,
-    color: theme.palette.pwar.blackLight,
+    fontSize: 16,
+    // color: theme.palette.pwar.blackLight,
+    color: "white",
   },
 
   tokenAmount: {
@@ -60,6 +63,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.pwar.black,
     fontSize: 12,
     fontWeight: 400,
+    color: "white",
+
     fontFamily: "Work Sans",
   },
 }));

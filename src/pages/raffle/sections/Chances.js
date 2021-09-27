@@ -15,9 +15,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 30,
     // background:
     //   "radial-gradient(128% 331% at 118% 0%, rgb(214, 240, 30) 0%, rgb(5, 225, 189) 100%)",
-    background:
-      "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
-    backgroundColor: "rgba(41, 42, 66, 0.3)",
+    // background:
+    //   "radial-gradient(160% 150% at 108% -9%, #ffffff 0%, #757575 100%)",
+    // backgroundColor: "rgba(41, 42, 66, 0.3)",
+    backgroundColor: "rgba(41, 42, 66, 0.5)",
     border: "1px solid #212121",
     filter: "drop-shadow(0 0 0.5rem #212121)",
     [theme.breakpoints.down("sm")]: {
@@ -29,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
     fontSize: 20,
-    color: theme.palette.pwar.blackLight,
+    // color: theme.palette.pwar.blackLight,
+    color: "white",
   },
   logoWrapper: {
     height: 30,
@@ -45,14 +47,16 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     paddingLeft: 10,
     fontSize: 15,
-    color: theme.palette.pwar.blackLight,
+    // color: theme.palette.pwar.blackLight,
+    color: "white",
   },
 
   tokenAmount: {
     fontWeight: 500,
     padding: 0,
     fontSize: 20,
-    color: theme.palette.pwar.blackLight,
+    // color: theme.palette.pwar.blackLight,
+    color: "white",
   },
   earn: {
     textAlign: "center",
@@ -60,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 12,
     fontWeight: 400,
     fontFamily: "Work Sans",
+    color: "white",
   },
 }));
 function Chances({ account }) {

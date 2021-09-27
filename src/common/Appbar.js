@@ -349,6 +349,13 @@ function PrimaryAppbar({
                 </Button>
               </ListItem>
             </Link>
+            <Link to={"/play"}>
+              <ListItem button onClick={toggleDrawer(anchor, false)} key={39}>
+                <Button variant="contained" className={classes.airdropButton}>
+                  Play and Earn
+                </Button>
+              </ListItem>
+            </Link>
             <ListItem button>
               <div>
                 <Button
@@ -530,6 +537,16 @@ function PrimaryAppbar({
                 Landing Page
               </Typography>
             </a>
+            <Link to="/play">
+              <Typography
+                variant="subtitle1"
+                noWrap
+                className={navIndex === 3 ? classes.tabsActive : classes.tabs}
+                onClick={() => setNavIndex(3)}
+              >
+                Play & Earn
+              </Typography>
+            </Link>
 
             <div className={classes.sectionDesktop}>
               {authenticated ? (
