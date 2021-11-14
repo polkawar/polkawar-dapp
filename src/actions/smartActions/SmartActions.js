@@ -267,7 +267,6 @@ export const checkPwarHolding = async () => {
 // PBR Staking Contract Connection ETH
 //Returns Amount staking
 export const checkPBRStakingAndHolding = async (address) => {
-
   // Ethereum Network
   let staking = await pbrContract.methods
     .getUserStakingData(address, 0)
@@ -286,17 +285,18 @@ export const checkPBRStakingAndHolding = async (address) => {
   let pbrHolded = parseInt(web3.utils.fromWei(holding.toString(), "ether"));
 
   let totalPbr = pbrStaked + pbrHolded;
- 
-   console.log('totalPbr:'+ totalPbr)
 
-    // Matic Network
-    let stakingMatic = await pbrMaticStakingContract.methods
-    .userInfo(0,address)
+  console.log("pbrStakedETH:" + pbrStaked);
+  console.log("pbrStakedETH:" + pbrStaked);
+  console.log("totalPbrEth:" + totalPbr);
+
+  // Matic Network
+  let stakingMatic = await pbrMaticStakingContract.methods
+    .userInfo(0, address)
     .call((err, res) => {
       return res;
     });
 
-  
   let holdingMatic = await pbrMaticTokenContract.methods
     .balanceOf(address)
     .call((err, res) => {
@@ -306,13 +306,18 @@ export const checkPBRStakingAndHolding = async (address) => {
     web3.utils.fromWei(stakingMatic.amount.toString(), "ether")
   );
 
-  let pbrHoldedMatic = parseInt(web3.utils.fromWei(holdingMatic.toString(), "ether"));
+  let pbrHoldedMatic = parseInt(
+    web3.utils.fromWei(holdingMatic.toString(), "ether")
+  );
 
   let totalPbrMatic = pbrStakedMatic + pbrHoldedMatic;
-  console.log('totalPbrMatic:'+ totalPbrMatic)
 
+  console.log("pbrStakedMatic:" + pbrStakedMatic);
+  console.log("pbrHoldedMatic:" + pbrHoldedMatic);
+  console.log("totalPbrMatic:" + totalPbrMatic);
 
-  let totalTokens=totalPbr+totalPbrMatic;
-  console.log('Total Tokens:'+ totalTokens)
+  let totalTokens = totalPbr + totalPbrMatic;
+
+  console.log("Total Tokens:" + totalTokens);
   return totalTokens;
 };
