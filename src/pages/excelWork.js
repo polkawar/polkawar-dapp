@@ -18,7 +18,6 @@ export default class ExcelWork extends Component {
   };
 
   handleOnFileLoad = (data) => {
-   
     let finalData = data.map((singleData) => {
       return singleData.data[0];
     });
@@ -71,7 +70,6 @@ export default class ExcelWork extends Component {
     console.log("Printing before");
   };
 
- 
   render() {
     return (
       <div>
