@@ -70,11 +70,11 @@ export default class ExcelWork extends Component {
     console.log("Printing before");
   };
 
-  getAddressHolding = async () => {
-    let address = "0x9D7117a07fca9F22911d379A9fd5118A5FA4F448";
-    let totalPBR = await checkPBRStakingAndHolding(address.toString());
-    console.log(totalPBR);
-  };
+  // getAddressHolding = async () => {
+  //   let address = "0x9D7117a07fca9F22911dd5118A5FA4F448";
+  //   let totalPBR = await checkPBRStakingAndHolding(address.toString());
+  //   console.log(totalPBR);
+  // };
   render() {
     return (
       <div>
@@ -145,7 +145,7 @@ export default class ExcelWork extends Component {
           <Button
             variant="contained"
             style={{ backgroundColor: "yellow" }}
-            onClick={this.getAddressHolding}
+            onClick={this.getHoldings}
           >
             Get Holding
           </Button>
