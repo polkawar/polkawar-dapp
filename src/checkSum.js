@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { checkPBRStakingAndHolding } from "../actions/smartActions/SmartActions";
 import { CSVReader, CSVDownloader, jsonToCSV } from "react-papaparse";
 import { Button } from "@material-ui/core";
 import { toChecksumAddress } from "ethereum-checksum-address";
 const buttonRef = React.createRef();
 
-export default class ExcelWork extends Component {
+export default class CheckSum extends Component {
   constructor(props) {
     super(props);
     this.state = { inputData: [], outputData: [], errorAddress: [] };
@@ -19,7 +18,10 @@ export default class ExcelWork extends Component {
 
   handleOnFileLoad = (data) => {
     let finalData = data.map((singleData) => {
-      return singleData.data[0];
+      return {
+        address: singleData.data[0],
+        amount: singleData.data[1],
+      };
     });
     this.setState({ inputData: finalData });
     console.log(finalData);
@@ -38,34 +40,28 @@ export default class ExcelWork extends Component {
   getHoldings = async () => {
     let data = this.state.inputData;
 
-    data.map(async (singleAddress, index) => {
-      setTimeout(async () => {
-        let totalPBR = await checkPBRStakingAndHolding(
-          singleAddress.toString()
-        );
-        console.log("index: " + index);
-        if (totalPBR !== null && totalPBR !== undefined) {
-          if (totalPBR >= 0) {
-            let tempObject = {
-              address: singleAddress,
-              amount: totalPBR,
-            };
-            this.setState({
-              outputData: [...this.state.outputData, tempObject],
-            });
-          } else {
-            this.setState({
-              errorAddress: [...this.state.errorAddress, singleAddress],
-            });
-          }
-        } else {
-          this.setState({
-            errorAddress: [...this.state.errorAddress, singleAddress],
-          });
-        }
-      }, index * 100);
+    let newData = [];
+    data.map((singleAddress, index) => {
+      let checkSumAddress = this.getCheckSum(
+        singleAddress["address"].toString()
+      );
+      console.log("index: " + index);
+      if (checkSumAddress !== null && checkSumAddress !== undefined) {
+        let tempObject = {
+          checkSumAddress: checkSumAddress,
+          amount: singleAddress["amount"],
+        };
+        newData = [...newData, tempObject];
+      } else {
+        this.setState({
+          errorAddress: [...this.state.errorAddress, singleAddress["address"]],
+        });
+      }
 
       return 121;
+    });
+    this.setState({
+      outputData: [...newData],
     });
     console.log("Printing before");
   };
@@ -75,10 +71,14 @@ export default class ExcelWork extends Component {
   //   let totalPBR = await checkPBRStakingAndHolding(address.toString());
   //   console.log(totalPBR);
   // };
-  getCheckSum = () => {
-    console.log(
-      toChecksumAddress("0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1")
-    );
+  getCheckSum = (address) => {
+    try {
+      let newAddress = toChecksumAddress(address);
+      return newAddress;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   };
   render() {
     return (
@@ -155,16 +155,6 @@ export default class ExcelWork extends Component {
             Get Holding
           </Button>
         </div>
-        <div className="text-center">
-          {" "}
-          <Button
-            variant="contained"
-            style={{ backgroundColor: "yellow" }}
-            onClick={this.getCheckSum}
-          >
-            Get Checksum
-          </Button>
-        </div>
         <CSVDownloader
           filename={"corgib_airdrop"}
           config={{
@@ -174,7 +164,7 @@ export default class ExcelWork extends Component {
             return this.state.outputData.map((singleRow, index) => {
               let final = {
                 No: index + 1,
-                Address: singleRow.address,
+                Address: singleRow.checkSumAddress,
                 Amount: singleRow.amount,
               };
               console.log(final);
