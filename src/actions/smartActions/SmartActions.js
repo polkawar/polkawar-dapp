@@ -321,3 +321,12 @@ export const checkPBRStakingAndHolding = async (address) => {
   console.log("Total Tokens:" + totalTokens);
   return totalTokens;
 };
+
+// Check ETH holding
+export const checkEthHolding = async (address) => {
+  let balance = await web3.eth.getBalance(address);
+
+  let ethBalance = web3.utils.fromWei(balance ? balance.toString() : "0");
+
+  return ethBalance;
+};

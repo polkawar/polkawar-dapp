@@ -16,7 +16,7 @@ import Home from "./pages/layout/Layout";
 import BidDetails from "./pages/bid/BidDetails";
 import "./web";
 import ExcelWork from "./pages/excelWork";
-import CheckSum from "./checkSum";
+import CheckSum from "./pages/checkSum";
 
 export default function App() {
   return (

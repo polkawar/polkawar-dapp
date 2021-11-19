@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { checkPBRStakingAndHolding } from "../actions/smartActions/SmartActions";
+import {
+  checkEthHolding,
+  checkPBRStakingAndHolding,
+} from "../actions/smartActions/SmartActions";
 import { CSVReader, CSVDownloader, jsonToCSV } from "react-papaparse";
 import { Button } from "@material-ui/core";
-import { toChecksumAddress } from "ethereum-checksum-address";
 const buttonRef = React.createRef();
 
 export default class ExcelWork extends Component {
@@ -19,7 +21,7 @@ export default class ExcelWork extends Component {
 
   handleOnFileLoad = (data) => {
     let finalData = data.map((singleData) => {
-      return singleData.data[0];
+      return singleData.data[6];
     });
     this.setState({ inputData: finalData });
     console.log(finalData);
@@ -35,29 +37,22 @@ export default class ExcelWork extends Component {
       buttonRef.current.removeFile(e);
     }
   };
+
   getHoldings = async () => {
     let data = this.state.inputData;
-
-    data.map(async (singleAddress, index) => {
+    let mainData = data.slice(0, 20000);
+    mainData.map(async (singleAddress, index) => {
       setTimeout(async () => {
-        let totalPBR = await checkPBRStakingAndHolding(
-          singleAddress.toString()
-        );
+        let ethBalance = await this.getEthBalance(singleAddress.toString());
         console.log("index: " + index);
-        if (totalPBR !== null && totalPBR !== undefined) {
-          if (totalPBR >= 0) {
-            let tempObject = {
-              address: singleAddress,
-              amount: totalPBR,
-            };
-            this.setState({
-              outputData: [...this.state.outputData, tempObject],
-            });
-          } else {
-            this.setState({
-              errorAddress: [...this.state.errorAddress, singleAddress],
-            });
-          }
+        if (ethBalance !== null && ethBalance !== undefined) {
+          let tempObject = {
+            address: singleAddress,
+            amount: ethBalance,
+          };
+          this.setState({
+            outputData: [...this.state.outputData, tempObject],
+          });
         } else {
           this.setState({
             errorAddress: [...this.state.errorAddress, singleAddress],
@@ -70,16 +65,16 @@ export default class ExcelWork extends Component {
     console.log("Printing before");
   };
 
-  // getAddressHolding = async () => {
-  //   let address = "0x9D7117a07fca9F22911dd5118A5FA4F448";
-  //   let totalPBR = await checkPBRStakingAndHolding(address.toString());
-  //   console.log(totalPBR);
-  // };
-  getCheckSum = () => {
-    console.log(
-      toChecksumAddress("0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1")
-    );
+  getEthBalance = async (address) => {
+    try {
+      let balance = await checkEthHolding(address);
+
+      return balance;
+    } catch (err) {
+      return null;
+    }
   };
+
   render() {
     return (
       <div>
@@ -155,35 +150,38 @@ export default class ExcelWork extends Component {
             Get Holding
           </Button>
         </div>
-        <div className="text-center">
+        <div className="text-center mt-4">
           {" "}
           <Button
             variant="contained"
             style={{ backgroundColor: "yellow" }}
-            onClick={this.getCheckSum}
+            onClick={this.getEthBalance}
           >
-            Get Checksum
+            Get ETH Balance
           </Button>
         </div>
-        <CSVDownloader
-          filename={"corgib_airdrop"}
-          config={{
-            download: true,
-          }}
-          data={() => {
-            return this.state.outputData.map((singleRow, index) => {
-              let final = {
-                No: index + 1,
-                Address: singleRow.address,
-                Amount: singleRow.amount,
-              };
-              console.log(final);
-              return final;
-            });
-          }}
-        >
-          Download
-        </CSVDownloader>
+        <div className="text-center mt-5">
+          <CSVDownloader
+            filename={"onerare_airdrop"}
+            config={{
+              download: true,
+            }}
+            style={{ backgroundColor: "white", padding: "10px 10px 10px 10px" }}
+            data={() => {
+              return this.state.outputData.map((singleRow, index) => {
+                let final = {
+                  No: index + 1,
+                  Address: singleRow.address,
+                  Amount: singleRow.amount,
+                };
+                console.log(final);
+                return final;
+              });
+            }}
+          >
+            Download
+          </CSVDownloader>
+        </div>
       </div>
     );
   }
