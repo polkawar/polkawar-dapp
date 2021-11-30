@@ -37,12 +37,12 @@ export default class CheckSum extends Component {
       buttonRef.current.removeFile(e);
     }
   };
-  getHoldings = async () => {
+  getCheckSum = async () => {
     let data = this.state.inputData;
 
     let newData = [];
     data.map((singleAddress, index) => {
-      let checkSumAddress = this.getCheckSum(
+      let checkSumAddress = this.calculateCheckSum(
         singleAddress["address"].toString()
       );
       console.log("index: " + index);
@@ -71,7 +71,7 @@ export default class CheckSum extends Component {
   //   let totalPBR = await checkPBRStakingAndHolding(address.toString());
   //   console.log(totalPBR);
   // };
-  getCheckSum = (address) => {
+  calculateCheckSum = (address) => {
     try {
       let newAddress = toChecksumAddress(address);
       return newAddress;
@@ -145,35 +145,67 @@ export default class CheckSum extends Component {
             </aside>
           )}
         </CSVReader>
-        <div className="text-center">
-          {" "}
-          <Button
+        <div className="d-flex justify-content-around">
+          <div className="text-center">
+            {" "}
+            <Button
+              variant="contained"
+              style={{
+                borderRadius: "50px",
+                background: `linear-gradient(to bottom,yellow, orange)`,
+                lineHeight: "24px",
+                verticalAlign: "baseline",
+                letterSpacing: "-1px",
+                margin: 0,
+                marginTop: 5,
+                color: "black",
+                padding: "14px 30px 14px 30px",
+                fontWeight: 400,
+                fontSize: 20,
+                textTransform: "none",
+                textDecoration: "none",
+              }}
+              onClick={this.getCheckSum}
+            >
+              Get CheckSum
+            </Button>
+          </div>
+          <CSVDownloader
+            filename={"corgib_airdrop"}
+            config={{
+              download: true,
+            }}
             variant="contained"
-            style={{ backgroundColor: "yellow" }}
-            onClick={this.getHoldings}
+            style={{
+              borderRadius: "50px",
+              background: `green`,
+              lineHeight: "24px",
+              verticalAlign: "baseline",
+              letterSpacing: "-1px",
+              margin: 0,
+              marginTop: 5,
+              color: "black",
+              padding: "14px 30px 14px 30px",
+              fontWeight: 400,
+              fontSize: 20,
+              textTransform: "none",
+              textDecoration: "none",
+            }}
+            data={() => {
+              return this.state.outputData.map((singleRow, index) => {
+                let final = {
+                  No: index + 1,
+                  Address: singleRow.checkSumAddress,
+                  Amount: singleRow.amount,
+                };
+                console.log(final);
+                return final;
+              });
+            }}
           >
-            Get Holding
-          </Button>
+            Download
+          </CSVDownloader>
         </div>
-        <CSVDownloader
-          filename={"corgib_airdrop"}
-          config={{
-            download: true,
-          }}
-          data={() => {
-            return this.state.outputData.map((singleRow, index) => {
-              let final = {
-                No: index + 1,
-                Address: singleRow.checkSumAddress,
-                Amount: singleRow.amount,
-              };
-              console.log(final);
-              return final;
-            });
-          }}
-        >
-          Download
-        </CSVDownloader>
       </div>
     );
   }
